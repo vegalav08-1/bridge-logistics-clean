@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Офлайн - Bridge Logistics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #00A86B 0%, #00C47A 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        
+        .retry-btn {
+            background: white;
+            color: #00A86B;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .retry-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .retry-btn:active {
+            transform: translateY(0);
+        }
+        
+        .features {
+            margin-top: 32px;
+            text-align: left;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00C47A;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📱</div>
+        <h1>Вы офлайн</h1>
+        <p>Нет подключения к интернету. Проверьте соединение и попробуйте снова.</p>
+        
+        <div class="status">
+            <div>Статус: <span id="status">Проверка соединения...</span></div>
+        </div>
+        
+        <button class="retry-btn" onclick="retryConnection()">Попробовать снова</button>
+        
+        <div class="features">
+            <p><strong>В офлайн режиме доступно:</strong></p>
+            <ul>
+                <li>Просмотр ранее загруженных чатов</li>
+                <li>Создание черновиков сообщений</li>
+                <li>Сканирование QR-кодов</li>
+                <li>Создание фото и видео</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let retryCount = 0;
+        const maxRetries = 5;
+        
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+        }
+        
+        function retryConnection() {
+            retryCount++;
+            updateStatus('Проверка соединения...');
+            
+            // Простая проверка соединения
+            fetch('/api/health', { 
+                method: 'HEAD',
+                cache: 'no-cache'
+            })
+            .then(() => {
+                updateStatus('Соединение восстановлено!');
+                setTimeout(() => {
+                    window.location.href = '/shipments';
+                }, 1000);
+            })
+            .catch(() => {
+                if (retryCount < maxRetries) {
+                    updateStatus(`Попытка ${retryCount}/${maxRetries} - Нет соединения`);
+                } else {
+                    updateStatus('Соединение недоступно. Попробуйте позже.');
+                }
+            });
+        }
+        
+        // Автоматическая проверка при загрузке
+        window.addEventListener('load', () => {
+            setTimeout(retryConnection, 1000);
+        });
+        
+        // Слушаем события сети
+        window.addEventListener('online', () => {
+            updateStatus('Соединение восстановлено!');
+            setTimeout(() => {
+                window.location.href = '/shipments';
+            }, 1000);
+        });
+        
+        window.addEventListener('offline', () => {
+            updateStatus('Соединение потеряно');
+        });
+    </script>
+</body>
+</html>
+
+
+
+

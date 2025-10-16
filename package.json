@@ -1,0 +1,42 @@
+{
+  "name": "bridge-logistics-system",
+  "version": "1.0.0",
+  "description": "🚀 Bridge Logistics System - Modern logistics management with full authentication and role-based access control",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check-exports": "node scripts/check-exports.js",
+    "fix-duplicates": "node scripts/fix-duplicates.js",
+    "fix-all": "node scripts/fix-all-issues.js",
+    "prebuild": "npm run fix-all && npm run check-exports"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@zxing/browser": "^0.0.9",
+    "clsx": "^2.1.1",
+    "idb": "^8.0.0",
+    "lucide-react": "^0.545.0",
+    "next": "^14.2.6",
+    "next-auth": "^4.24.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.3.1",
+    "uuid": "^9.0.1",
+    "workbox-window": "^7.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/uuid": "^9.0.8",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.37.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.6.2"
+  }
+}

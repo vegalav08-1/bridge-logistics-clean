@@ -22,6 +22,34 @@ export const db = {
     update: (args?: any) => Promise.resolve({}),
     delete: (args?: any) => Promise.resolve({}),
   },
+  chat: {
+    findUnique: (args?: any) => Promise.resolve(null),
+    findMany: (args?: any) => Promise.resolve([]),
+    create: (args?: any) => Promise.resolve({}),
+    update: (args?: any) => Promise.resolve({}),
+    delete: (args?: any) => Promise.resolve({}),
+  },
+  message: {
+    findUnique: (args?: any) => Promise.resolve(null),
+    findMany: (args?: any) => Promise.resolve([]),
+    create: (args?: any) => Promise.resolve({}),
+    update: (args?: any) => Promise.resolve({}),
+    delete: (args?: any) => Promise.resolve({}),
+  },
+  order: {
+    findUnique: (args?: any) => Promise.resolve(null),
+    findMany: (args?: any) => Promise.resolve([]),
+    create: (args?: any) => Promise.resolve({}),
+    update: (args?: any) => Promise.resolve({}),
+    delete: (args?: any) => Promise.resolve({}),
+  },
+  partner: {
+    findUnique: (args?: any) => Promise.resolve(null),
+    findMany: (args?: any) => Promise.resolve([]),
+    create: (args?: any) => Promise.resolve({}),
+    update: (args?: any) => Promise.resolve({}),
+    delete: (args?: any) => Promise.resolve({}),
+  },
   // Add other mock database operations as needed
 };
 

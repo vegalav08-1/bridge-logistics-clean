@@ -7,6 +7,10 @@ export interface ACLContextType {
   role: string;
   permissions: string[];
   canAccess: (resource: string, action?: string) => boolean;
+  ability: {
+    can: (resource: string, action?: string) => boolean;
+    reason: (resource: string, action?: string) => string | null;
+  };
   ctx: {
     userId: string;
     role: string;
@@ -42,11 +46,22 @@ export function ACLProvider({
     return false;
   };
 
+  const ability = {
+    can: canAccess,
+    reason: (resource: string, action?: string) => {
+      if (!canAccess(resource, action)) {
+        return `Access denied to ${resource}${action ? ` for action ${action}` : ''}`;
+      }
+      return null;
+    }
+  };
+
   const value: ACLContextType = {
     userId,
     role,
     permissions,
     canAccess,
+    ability,
     ctx: {
       userId,
       role,
@@ -65,11 +80,16 @@ export function useACL(): ACLContextType {
   const context = useContext(ACLContext);
   if (!context) {
     // Return mock context for SSR
+    const mockCanAccess = () => true;
     return {
       userId: 'user-1',
       role: 'SUPER_ADMIN',
       permissions: [],
-      canAccess: () => true,
+      canAccess: mockCanAccess,
+      ability: {
+        can: mockCanAccess,
+        reason: () => null
+      },
       ctx: {
         userId: 'user-1',
         role: 'SUPER_ADMIN',

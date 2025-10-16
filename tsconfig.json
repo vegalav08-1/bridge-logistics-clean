@@ -12,6 +12,8 @@
     "baseUrl": ".",
     "strict": false,
     "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictFunctionTypes": false,
     "types": [
       "node"
     ],

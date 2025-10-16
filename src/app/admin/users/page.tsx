@@ -58,7 +58,7 @@ export default function UsersPage() {
   const [showExportMenu, setShowExportMenu] = useState(false);
 
   // Проверяем права доступа
-  if (!canManageUsers(ctx.role)) {
+  if (!canManageUsers(ctx.role as any)) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="w-full max-w-md">

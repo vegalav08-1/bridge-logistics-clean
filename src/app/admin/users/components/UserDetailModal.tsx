@@ -351,7 +351,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {user.permissions.map((permission, index) => (
+                {user?.permissions?.map((permission, index) => (
                   <div
                     key={index}
                     className="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-xs font-medium"

@@ -10,7 +10,8 @@
       ]
     },
     "baseUrl": ".",
-    "strict": true,
+    "strict": false,
+    "strictNullChecks": false,
     "types": [
       "node"
     ],

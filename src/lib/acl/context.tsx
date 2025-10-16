@@ -18,17 +18,18 @@ const ACLContext = createContext<ACLContextType | null>(null);
 
 interface ACLProviderProps {
   children: ReactNode;
-  userId: string;
-  role: string;
-  permissions?: string[];
+  ctx: {
+    userId: string;
+    role: string;
+    permissions?: string[];
+  };
 }
 
 export function ACLProvider({ 
   children, 
-  userId, 
-  role, 
-  permissions = [] 
+  ctx 
 }: ACLProviderProps) {
+  const { userId, role, permissions = [] } = ctx;
   const canAccess = (resource: string, action?: string): boolean => {
     // Mock implementation - in real app, this would check against user permissions
     if (role === 'SUPER_ADMIN') return true;

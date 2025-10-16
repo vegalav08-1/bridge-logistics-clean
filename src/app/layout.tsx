@@ -15,8 +15,7 @@ import RealtimeWrapper from '@/components/realtime/RealtimeWrapper';
 import ToasterBridge from '@/components/toast/ToasterBridge';
 import { ACLProvider } from '@/lib/acl/context';
 import ACLDevtools from '@/lib/acl/devtools';
-import { initTestNotifications } from '@/lib/notifications/seed';
-import { initDevHelpers } from '@/lib/partners/dev-helpers';
+import { ClientInitializer } from '@/components/ClientInitializer';
 import { 
   Package, 
   Search, 
@@ -42,20 +41,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'wss://example.com/ws';
-  
-  // Инициализация тестовых данных для уведомлений в development
-  React.useEffect(() => {
-    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development' && NOTIFICATIONS_V2_ENABLED) {
-      initTestNotifications();
-    }
-  }, []);
-  
-  // Инициализация dev helpers для партнеров
-  React.useEffect(() => {
-    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-      initDevHelpers();
-    }
-  }, []);
   
   // Получаем информацию о пользователе из сессии
   // В реальном приложении это будет получаться из cookies/headers
@@ -376,12 +361,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     {content}
                     <ToasterBridge />
                     <ACLDevtools />
+                    <ClientInitializer />
                   </InboxProvider>
                 ) : (
                   <>
                     {content}
                     <ToasterBridge />
                     <ACLDevtools />
+                    <ClientInitializer />
                   </>
                 )}
               </RealtimeWrapper>
@@ -390,11 +377,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <InboxProvider>
                   {content}
                   <ACLDevtools />
+                  <ClientInitializer />
                 </InboxProvider>
               ) : (
                 <>
                   {content}
                   <ACLDevtools />
+                  <ClientInitializer />
                 </>
               )
             )}
@@ -406,11 +395,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <InboxProvider>
                   {content}
                   <ToasterBridge />
+                  <ClientInitializer />
                 </InboxProvider>
               ) : (
                 <>
                   {content}
                   <ToasterBridge />
+                  <ClientInitializer />
                 </>
               )}
             </RealtimeWrapper>
@@ -418,9 +409,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             INBOX_V2_ENABLED ? (
               <InboxProvider>
                 {content}
+                <ClientInitializer />
               </InboxProvider>
             ) : (
-              content
+              <>
+                {content}
+                <ClientInitializer />
+              </>
             )
           )
         )}

@@ -151,25 +151,6 @@ export default function AuditPage() {
   const [dateRange, setDateRange] = useState('today');
   const [activeTab, setActiveTab] = useState('audit');
 
-  // Проверяем права доступа
-  if (ctx.role !== 'SUPER_ADMIN') {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardContent className="p-6 text-center">
-            <Shield className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">
-              Доступ запрещен
-            </h2>
-            <p className="text-gray-600">
-              У вас нет прав для просмотра аудита.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   // Фильтрация логов
   useEffect(() => {
     let filtered = auditLogs;
@@ -586,4 +567,23 @@ export default function AuditPage() {
       </div>
     </div>
   );
+
+  // Проверяем права доступа
+  if (ctx.role !== 'SUPER_ADMIN') {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="p-6 text-center">
+            <Shield className="h-12 w-12 text-red-500 mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              Доступ запрещен
+            </h2>
+            <p className="text-gray-600">
+              У вас нет прав для просмотра аудита.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 }

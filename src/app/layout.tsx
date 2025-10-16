@@ -44,18 +44,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'wss://example.com/ws';
   
   // Инициализация тестовых данных для уведомлений в development
-  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development' && NOTIFICATIONS_V2_ENABLED) {
-    React.useEffect(() => {
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development' && NOTIFICATIONS_V2_ENABLED) {
       initTestNotifications();
-    }, []);
-  }
+    }
+  }, []);
   
   // Инициализация dev helpers для партнеров
-  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-    React.useEffect(() => {
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
       initDevHelpers();
-    }, []);
-  }
+    }
+  }, []);
   
   // Получаем информацию о пользователе из сессии
   // В реальном приложении это будет получаться из cookies/headers

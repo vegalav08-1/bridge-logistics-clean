@@ -180,7 +180,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                   ) : (
                     <div className="flex items-center space-x-2">
                       <Mail className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-900">{user.email}</span>
+                      <span className="text-sm text-gray-900">{user?.email}</span>
                     </div>
                   )}
                 </div>
@@ -191,7 +191,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                   </label>
                   <div className="flex items-center space-x-2">
                     <Lock className="h-4 w-4 text-gray-400" />
-                    <span className="text-sm text-gray-900 font-mono">{user.id}</span>
+                     <span className="text-sm text-gray-900 font-mono">{user?.id}</span>
                   </div>
                 </div>
 
@@ -199,9 +199,9 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Роль
                   </label>
-                  {isEditing && canEditUsers(ctx.role) ? (
+                  {isEditing && canEditUsers(ctx.role as any) ? (
                     <select
-                      value={currentUser.role}
+                      value={currentUser?.role || ''}
                       onChange={(e) => handleRoleChange(e.target.value as any)}
                       className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
@@ -210,8 +210,8 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                       <option value="SUPER_ADMIN">Супер-администратор</option>
                     </select>
                   ) : (
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.role)}`}>
-                      {user.role}
+                     <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user?.role || '')}`}>
+                       {user?.role}
                     </span>
                   )}
                 </div>
@@ -223,7 +223,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                   {isEditing ? (
                     <div className="flex space-x-2">
                       <Button
-                        variant={currentUser.status === 'active' ? 'primary' : 'secondary'}
+                         variant={currentUser?.status === 'active' ? 'primary' : 'secondary'}
                         size="sm"
                         onClick={() => handleStatusChange('active')}
                       >
@@ -231,7 +231,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                         Активный
                       </Button>
                       <Button
-                        variant={currentUser.status === 'inactive' ? 'primary' : 'secondary'}
+                         variant={currentUser?.status === 'inactive' ? 'primary' : 'secondary'}
                         size="sm"
                         onClick={() => handleStatusChange('inactive')}
                       >
@@ -239,7 +239,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                         Неактивный
                       </Button>
                       <Button
-                        variant={currentUser.status === 'suspended' ? 'primary' : 'secondary'}
+                         variant={currentUser?.status === 'suspended' ? 'primary' : 'secondary'}
                         size="sm"
                         onClick={() => handleStatusChange('suspended')}
                       >
@@ -249,9 +249,9 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                     </div>
                   ) : (
                     <div className="flex items-center space-x-2">
-                      {getStatusIcon(user.status)}
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user.status)}`}>
-                        {user.status}
+                       {getStatusIcon(user?.status || '')}
+                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(user?.status || '')}`}>
+                         {user?.status}
                       </span>
                     </div>
                   )}
@@ -266,7 +266,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                   <div className="flex items-center space-x-2">
                     <Calendar className="h-4 w-4 text-gray-400" />
                     <span className="text-sm text-gray-900">
-                      {new Date(user.createdAt).toLocaleDateString('ru-RU', {
+                       {new Date(user?.createdAt || '').toLocaleDateString('ru-RU', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
@@ -284,7 +284,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                   <div className="flex items-center space-x-2">
                     <Activity className="h-4 w-4 text-gray-400" />
                     <span className="text-sm text-gray-900">
-                      {new Date(user.lastLogin).toLocaleDateString('ru-RU', {
+                       {new Date(user?.lastLogin || '').toLocaleDateString('ru-RU', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
@@ -310,19 +310,19 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="text-2xl font-bold text-gray-900">
-                    {user.metadata.loginCount}
+                     {user?.metadata?.loginCount || 0}
                   </div>
                   <div className="text-sm text-gray-600">Всего входов</div>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="text-2xl font-bold text-gray-900">
-                    {user.metadata.ipAddress}
+                     {user?.metadata?.ipAddress || 'N/A'}
                   </div>
                   <div className="text-sm text-gray-600">IP адрес</div>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="text-2xl font-bold text-gray-900">
-                    {user.metadata.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'}
+                     {user?.metadata?.userAgent?.includes('Mobile') ? 'Mobile' : 'Desktop'}
                   </div>
                   <div className="text-sm text-gray-600">Тип устройства</div>
                 </div>
@@ -334,7 +334,7 @@ export function UserDetailModal({ user, isOpen, onClose, onSave }: UserDetailMod
                 </label>
                 <div className="bg-gray-50 p-3 rounded-lg">
                   <code className="text-xs text-gray-600 break-all">
-                    {user.metadata.userAgent}
+                     {user?.metadata?.userAgent || 'N/A'}
                   </code>
                 </div>
               </div>

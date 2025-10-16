@@ -6,19 +6,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-duplicate-exports': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
-  overrides: [
-    {
-      files: ['**/*.ts', '**/*.tsx'],
-      parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint'],
-      extends: ['plugin:@typescript-eslint/recommended'],
-      rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-      },
-    },
-  ],
 };

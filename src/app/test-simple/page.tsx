@@ -12,7 +12,7 @@ export default function TestSimplePage() {
 
     try {
       // Получаем токен из localStorage
-      const token = localStorage.getItem('access_token');
+      const token = typeof window !== 'undefined' ? localStorage.getItem() : null'access_token');
       console.log('Token from localStorage:', token ? `${token.substring(0, 50)}...` : 'None');
 
       if (!token) {
@@ -74,7 +74,7 @@ export default function TestSimplePage() {
 
       // Сохраняем токен
       if (data.accessToken) {
-        localStorage.setItem('access_token', data.accessToken);
+        typeof window !== 'undefined' ? localStorage.setItem() : null'access_token', data.accessToken);
         setTestResult(`Login successful! Token: ${data.accessToken.substring(0, 50)}...`);
       } else {
         setTestResult('Login successful but no token received');

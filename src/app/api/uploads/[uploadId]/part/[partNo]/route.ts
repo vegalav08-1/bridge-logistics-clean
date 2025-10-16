@@ -3,6 +3,8 @@ import { getCurrentUser } from '@/lib/auth';
 import { prisma } from '@/lib/db-mock';
 import { FLAGS } from '@/lib/flags';
 
+export const dynamic = 'force-dynamic';
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { uploadId: string; partNo: string } }

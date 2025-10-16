@@ -3,6 +3,8 @@ import { prisma } from '@/lib/db-mock';
 import { verifyAccess } from '@/lib/auth-mock';
 import { FLAGS } from '@/lib/flags';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }

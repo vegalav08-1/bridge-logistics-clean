@@ -9,7 +9,7 @@ const STORAGE_KEY_PREFIX = 'chat_messages_';
 export function saveChatMessages(chatId: string, messages: ChatMessage[]): void {
   try {
     const key = `${STORAGE_KEY_PREFIX}${chatId}`;
-    localStorage.setItem(key, JSON.stringify(messages));
+    typeof window !== 'undefined' ? localStorage.setItemkey, JSON.stringify(messages));
     console.log(`Saved ${messages.length} messages for chat ${chatId}`);
   } catch (error) {
     console.error('Failed to save chat messages:', error);
@@ -22,7 +22,7 @@ export function saveChatMessages(chatId: string, messages: ChatMessage[]): void 
 export function loadChatMessages(chatId: string): ChatMessage[] {
   try {
     const key = `${STORAGE_KEY_PREFIX}${chatId}`;
-    const stored = localStorage.getItem(key);
+    const stored = typeof window !== 'undefined' ? localStorage.getItem() : nullkey);
     if (stored) {
       const messages = JSON.parse(stored);
       console.log(`Loaded ${messages.length} messages for chat ${chatId}`);
@@ -54,7 +54,7 @@ export function addChatMessage(chatId: string, newMessage: ChatMessage): void {
 export function clearChatMessages(chatId: string): void {
   try {
     const key = `${STORAGE_KEY_PREFIX}${chatId}`;
-    localStorage.removeItem(key);
+    typeof window !== 'undefined' ? localStorage.removeItem() : nullkey);
     console.log(`Cleared messages for chat ${chatId}`);
   } catch (error) {
     console.error('Failed to clear chat messages:', error);
@@ -67,8 +67,8 @@ export function clearChatMessages(chatId: string): void {
 export function getAllChatKeys(): string[] {
   try {
     const keys: string[] = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+    for (let i = 0; i < typeof window !== 'undefined' ? localStorage.length : 0; i++) {
+      const key = typeof window !== 'undefined' ? localStorage.key() : nulli);
       if (key && key.startsWith(STORAGE_KEY_PREFIX)) {
         keys.push(key.replace(STORAGE_KEY_PREFIX, ''));
       }

@@ -46,7 +46,7 @@ export async function apiRequest<T = any>(
         console.log('Token refreshed successfully');
         
         // Обновляем токен в localStorage
-        localStorage.setItem('access_token', refreshData.accessToken);
+        typeof window !== 'undefined' ? localStorage.setItem'access_token', refreshData.accessToken);
         
         // Повторяем запрос с новым токеном
         const retryConfig: RequestInit = {
@@ -85,7 +85,7 @@ export async function apiRequest<T = any>(
       } else {
         console.log('Token refresh failed, redirecting to login');
         // Если обновление не удалось, перенаправляем на логин
-        localStorage.removeItem('access_token');
+        typeof window !== 'undefined' ? localStorage.removeItem() : null'access_token');
         window.location.href = '/login';
         return {
           error: 'Session expired',

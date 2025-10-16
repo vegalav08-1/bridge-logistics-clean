@@ -49,7 +49,7 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      typeof window !== 'undefined' ? localStorage.setItem() : nullstorageKey, theme);
       setTheme(theme);
     },
   };

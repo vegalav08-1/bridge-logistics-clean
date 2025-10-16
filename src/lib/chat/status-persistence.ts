@@ -30,7 +30,7 @@ export function saveShipmentStatus(chatId: string, status: ShipmentStatus, trans
       }
     };
     
-    localStorage.setItem(STATUS_STORAGE_KEY, JSON.stringify(updatedData));
+    typeof window !== 'undefined' ? localStorage.setItem() : null) : nullSTATUS_STORAGE_KEY, JSON.stringify(updatedData));
     console.log(`Статус отгрузки ${chatId} сохранен: ${status}`);
   } catch (error) {
     console.error('Ошибка при сохранении статуса отгрузки:', error);
@@ -59,7 +59,7 @@ export function loadAllShipmentStatuses(): Record<string, ShipmentStatusData> {
   if (typeof window === 'undefined') return {};
   
   try {
-    const data = localStorage.getItem(STATUS_STORAGE_KEY);
+    const data = typeof window !== 'undefined' ? localStorage.getItem() : nullSTATUS_STORAGE_KEY);
     return data ? JSON.parse(data) : {};
   } catch (error) {
     console.error('Ошибка при загрузке всех статусов:', error);
@@ -76,7 +76,7 @@ export function removeShipmentStatus(chatId: string): void {
   try {
     const allData = loadAllShipmentStatuses();
     delete allData[chatId];
-    localStorage.setItem(STATUS_STORAGE_KEY, JSON.stringify(allData));
+    typeof window !== 'undefined' ? localStorage.setItem(STATUS_STORAGE_KEY, JSON.stringify(allData));
     console.log(`Статус отгрузки ${chatId} удален`);
   } catch (error) {
     console.error('Ошибка при удалении статуса отгрузки:', error);
@@ -90,7 +90,7 @@ export function clearAllShipmentStatuses(): void {
   if (typeof window === 'undefined') return;
   
   try {
-    localStorage.removeItem(STATUS_STORAGE_KEY);
+    typeof window !== 'undefined' ? localStorage.removeItem() : nullSTATUS_STORAGE_KEY);
     console.log('Все статусы отгрузок очищены');
   } catch (error) {
     console.error('Ошибка при очистке статусов:', error);

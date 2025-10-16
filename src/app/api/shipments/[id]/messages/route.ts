@@ -5,6 +5,8 @@ import { FLAGS } from '@/lib/flags';
 import { verifyAccess } from '@/lib/auth-mock';
 import { createMessageNotification } from '@/lib/auth-mock';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   if (!FLAGS.CHAT_SUMMARY_ON_CREATE) {
     return NextResponse.json({ error: 'Chat feature is disabled' }, { status: 404 });

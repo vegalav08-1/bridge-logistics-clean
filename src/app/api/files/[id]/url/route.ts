@@ -5,6 +5,8 @@ import { FLAGS } from '@/lib/flags';
 import { createS3Client, getPresignedGet } from '@/lib/files-mock/s3';
 import { db } from '@/lib/db-mock';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }

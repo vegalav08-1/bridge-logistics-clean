@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db-mock';
 import { verifyRefresh } from '@/lib/auth-mock';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const refreshToken = request.cookies.get('rt')?.value;

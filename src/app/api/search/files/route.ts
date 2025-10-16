@@ -3,6 +3,8 @@ import { prisma } from '@/lib/db-mock';
 import { getCurrentUser } from '@/lib/auth';
 import { FLAGS } from '@/lib/flags';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   if (!FLAGS.FILES_OCR_ENABLED) {
     return NextResponse.json({ error: 'OCR search is disabled' }, { status: 404 });

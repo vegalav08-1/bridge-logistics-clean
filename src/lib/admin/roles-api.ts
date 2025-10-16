@@ -181,7 +181,7 @@ const saveRolesToStorage = (roles: Role[]): void => {
   if (typeof window === 'undefined') return;
   
   try {
-    localStorage.setItem('mockRoles', JSON.stringify(roles));
+    typeof window !== 'undefined' ? localStorage.setItem'mockRoles', JSON.stringify(roles));
     console.log('💾 Роли сохранены в localStorage:', roles.length);
   } catch (error) {
     console.error('Ошибка сохранения ролей в localStorage:', error);

@@ -23,18 +23,18 @@ export default function HomePage() {
 
             if (response.ok) {
               // Очищаем localStorage
-              localStorage.clear();
+              typeof window !== 'undefined' ? localStorage.clear() : null;
               // Перенаправляем на страницу входа
               window.location.href = '/login';
             } else {
               // Если API не сработал, все равно очищаем и перенаправляем
-              localStorage.clear();
+              typeof window !== 'undefined' ? localStorage.clear() : null;
               window.location.href = '/login';
             }
           } catch (error) {
             console.error('Ошибка выхода из системы:', error);
             // В любом случае очищаем localStorage и перенаправляем на страницу входа
-            localStorage.clear();
+            typeof window !== 'undefined' ? localStorage.clear() : null;
             window.location.href = '/login';
           }
         };

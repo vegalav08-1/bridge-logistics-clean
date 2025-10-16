@@ -6,6 +6,8 @@ import { createS3Client, getPresignedPut, generateObjectKey } from '@/lib/files-
 import { getFileType } from '@/lib/files-mock/mime';
 import { db } from '@/lib/db-mock';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     // Проверяем фиче-флаг

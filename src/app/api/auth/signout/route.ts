@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   // Перенаправление на страницу входа с очисткой cookies
   const response = NextResponse.redirect(new URL('/login', request.url));

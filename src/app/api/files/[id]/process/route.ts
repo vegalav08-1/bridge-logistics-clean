@@ -5,6 +5,8 @@ import { processAttachment, updateAttachmentMetadata, createProcessingSystemCard
 import { db } from '@/lib/db-mock';
 
 const processFileSchema = z.object({
+
+export const dynamic = 'force-dynamic';
   attachmentId: z.string().cuid('Неверный формат ID вложения'),
 });
 

@@ -42,7 +42,7 @@ const loadUsersFromStorage = (): User[] => {
   if (typeof window === 'undefined') return [];
   
   try {
-    const stored = localStorage.getItem('mockUsers');
+    const stored = typeof window !== 'undefined' ? localStorage.getItem'mockUsers');
     if (stored) {
       const parsed = JSON.parse(stored);
       console.log('📦 Загружены пользователи из localStorage:', parsed.length);
@@ -59,7 +59,7 @@ const saveUsersToStorage = (users: User[]) => {
   if (typeof window === 'undefined') return;
   
   try {
-    localStorage.setItem('mockUsers', JSON.stringify(users));
+    typeof window !== 'undefined' ? localStorage.setItem'mockUsers', JSON.stringify(users));
     console.log('💾 Пользователи сохранены в localStorage:', users.length);
   } catch (error) {
     console.error('Ошибка сохранения в localStorage:', error);

@@ -5,6 +5,8 @@ import { verifyAccess } from '@/lib/auth-mock';
 import { createOfferSchema } from '@/lib/auth-mock';
 import { FLAGS } from '@/lib/flags';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     // Проверяем фиче-флаг

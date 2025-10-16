@@ -4,7 +4,7 @@ export default function PhotoStrip({ items, onPick }: { items: any[]; onPick: (f
   return (
     <div className="rounded-2xl border p-2">
       <div className="flex gap-2 overflow-auto">
-        {items.map(ph => <img key={ph.id} src={ph.url} className="h-16 w-16 object-cover rounded-lg border" />)}
+        {items.map(ph => <img key={ph.id} src={ph.url} alt="Photo" className="h-16 w-16 object-cover rounded-lg border" />)}
         <label className="h-16 w-16 rounded-lg border grid place-items-center text-xs cursor-pointer">
           + Photo
           <input type="file" accept="image/*" className="hidden" onChange={pick} />

@@ -39,7 +39,7 @@ export default function PartnersPage() {
 
   const loadUsers = async (cursor?: string, append = false) => {
     try {
-      const token = typeof window !== 'undefined' ? localStorage.getItem() : null'accessToken');
+      const token = localStorage.getItem('accessToken');
       if (!token) {
         router.push('/login');
         return;
